@@ -1,166 +1,205 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiniela MLB Playoffs 2026</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<title>Quiniela MLB Playoffs 2026</title>
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0b1220;
-      color: white;
-      text-align: center;
-    }
+<style>
 
-    .contenedor {
-      max-width: 600px;
-      margin: auto;
-      padding: 25px 15px;
-    }
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #06152f, #0b2d5c);
+    color: white;
+    text-align: center;
+    min-height: 100vh;
+}
+
+.contenedor {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.subtitulo {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.info {
+    background: rgba(255,255,255,0.12);
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.info strong {
+    display: block;
+    font-size: 20px;
+    margin: 5px;
+}
+
+input {
+    width: 90%;
+    max-width: 400px;
+    padding: 15px;
+    border-radius: 10px;
+    border: none;
+    font-size: 18px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+h2 {
+    margin-top: 15px;
+}
+
+#casillas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.casilla {
+    background: white;
+    color: #06214b;
+    border: none;
+    border-radius: 15px;
+    padding: 25px 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+}
+
+.casilla:hover {
+    transform: scale(1.03);
+}
+
+.casilla:disabled {
+    cursor: not-allowed;
+}
+
+.casilla.ocupada {
+    background: #777;
+    color: white;
+}
+
+#resultado {
+    display: none;
+    margin-top: 30px;
+    background: white;
+    color: #06214b;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+
+#equipo {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+#participante,
+#numeroCasilla {
+    font-size: 18px;
+    margin: 8px;
+}
+
+.nota {
+    margin-top: 25px;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+@media (max-width: 450px) {
 
     h1 {
-      font-size: 30px;
-      margin-bottom: 5px;
+        font-size: 26px;
     }
 
-    .subtitulo {
-      color: #cbd5e1;
-      margin-bottom: 25px;
-    }
-
-    .premio {
-      background: #172033;
-      border-radius: 15px;
-      padding: 15px;
-      margin-bottom: 25px;
-    }
-
-    .premio strong {
-      font-size: 22px;
-    }
-
-    input {
-      width: 100%;
-      padding: 14px;
-      font-size: 17px;
-      border-radius: 10px;
-      border: none;
-      margin-bottom: 20px;
-    }
-
-    .casillas {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
+    #casillas {
+        gap: 10px;
     }
 
     .casilla {
-      height: 120px;
-      border: 2px solid #334155;
-      background: #172033;
-      color: white;
-      border-radius: 15px;
-      font-size: 28px;
-      font-weight: bold;
-      cursor: pointer;
+        padding: 22px 5px;
+        font-size: 16px;
     }
 
-    .casilla:hover {
-      background: #24324a;
-    }
+}
 
-    .casilla.ocupada {
-      background: #374151;
-      cursor: not-allowed;
-      opacity: 0.6;
-    }
-
-    .resultado {
-      display: none;
-      margin-top: 25px;
-      background: #172033;
-      border-radius: 15px;
-      padding: 25px;
-    }
-
-    .resultado h2 {
-      margin-top: 0;
-    }
-
-    .equipo {
-      font-size: 25px;
-      font-weight: bold;
-      margin: 15px 0;
-    }
-
-    .aviso {
-      margin-top: 20px;
-      color: #cbd5e1;
-    }
-  </style>
+</style>
 </head>
 
 <body>
 
 <div class="contenedor">
 
-  <h1>⚾ QUINIELA MLB 2026 🏆</h1>
+    <h1>⚾ QUINIELA MLB 2026 🏆</h1>
 
-  <div class="subtitulo">
-    PLAYOFFS MLB
-  </div>
+    <div class="subtitulo">
+        Selecciona una casilla y descubre tu equipo
+    </div>
 
-  <div class="premio">
-    💵 Entrada: <strong>$500</strong><br>
-    👥 8 participantes<br>
-    🏆 Premio: <strong>$4,000</strong>
-  </div>
+    <div class="info">
+        <strong>💰 Entrada: $500 MXN</strong>
+        <strong>👥 8 Participantes</strong>
+        <strong>🏆 Premio: $4,000 MXN</strong>
+    </div>
 
-  <p>Escribe tu nombre:</p>
+    <h2>👤 Escribe tu nombre</h2>
 
-  <input
-    type="text"
-    id="nombre"
-    placeholder="Ejemplo: Juan"
-    maxlength="30"
-  >
+    <input
+        type="text"
+        id="nombre"
+        placeholder="Nombre del participante"
+    >
 
-  <p>🎟️ Elige una casilla</p>
+    <h2>🎟️ Elige una casilla</h2>
 
-  <div class="casillas" id="casillas"></div>
+    <div id="casillas"></div>
 
-  <div class="resultado" id="resultado">
-    <h2>🎉 ¡EQUIPO ASIGNADO!</h2>
+    <div id="resultado">
 
-    <div class="equipo" id="equipo"></div>
+        <div id="participante"></div>
 
-    <p id="participante"></p>
-    <p id="numeroCasilla"></p>
-  </div>
+        <div id="numeroCasilla"></div>
 
-  <div class="aviso">
-    ⚠️ Una vez elegida una casilla, no se puede cambiar.
-  </div>
+        <div id="equipo"></div>
+
+        <div style="font-size:18px;">
+            ¡Esta es tu selección! 🎉
+        </div>
+
+    </div>
+
+    <div class="nota">
+        Cada casilla recibe un equipo diferente.
+    </div>
 
 </div>
 
 <script>
 
 const equipos = [
-  "Los Angeles Dodgers",
-  "Milwaukee Brewers",
-  "Cleveland Guardians",
-  "Tampa Bay Rays",
-  "New York Yankees",
-  "Chicago White Sox",
-  "San Diego Padres",
-  "Atlanta Braves"
+    "Los Angeles Dodgers",
+    "Milwaukee Brewers",
+    "Cleveland Guardians",
+    "Tampa Bay Rays",
+    "New York Yankees",
+    "Chicago White Sox",
+    "San Diego Padres",
+    "Atlanta Braves"
 ];
 
 let equiposDisponibles = [...equipos];
@@ -174,62 +213,72 @@ const numeroCasilla = document.getElementById("numeroCasilla");
 
 for (let i = 1; i <= 8; i++) {
 
-  const boton = document.createElement("button");
+    const boton = document.createElement("button");
 
-  boton.className = "casilla";
-  boton.innerHTML = "🔒<br>CASILLA " + i;
+    boton.className = "casilla";
 
-  boton.onclick = function () {
+    boton.innerHTML = "🔒<br>CASILLA " + i;
 
-    const nombreParticipante = nombre.value.trim();
+    boton.onclick = function () {
 
-    if (nombreParticipante === "") {
-      alert("Primero escribe tu nombre.");
-      nombre.focus();
-      return;
-    }
+        const nombreParticipante = nombre.value.trim();
 
-    if (equiposDisponibles.length === 0) {
-      alert("Todos los equipos ya fueron asignados.");
-      return;
-    }
+        if (nombreParticipante === "") {
 
-    const posicion = Math.floor(
-      Math.random() * equiposDisponibles.length
-    );
+            alert("Primero escribe tu nombre.");
 
-    const equipoAsignado =
-      equiposDisponibles.splice(posicion, 1)[0];
+            nombre.focus();
 
-    boton.classList.add("ocupada");
-    boton.disabled = true;
+            return;
+        }
 
-    boton.innerHTML =
-      "🔒<br>OCUPADA";
+        if (equiposDisponibles.length === 0) {
 
-    equipo.textContent = "⚾ " + equipoAsignado;
+            alert("Todos los equipos ya fueron asignados.");
 
-    participante.textContent =
-      "👤 Participante: " + nombreParticipante;
+            return;
+        }
 
-    numeroCasilla.textContent =
-      "🎟️ Casilla: " + i;
+        const posicion = Math.floor(
+            Math.random() * equiposDisponibles.length
+        );
 
-    resultado.style.display = "block";
+        const equipoAsignado =
+            equiposDisponibles.splice(posicion, 1)[0];
 
-    nombre.value = "";
+        boton.classList.add("ocupada");
 
-    if (equiposDisponibles.length === 0) {
+        boton.disabled = true;
 
-      setTimeout(function () {
-        alert("🏆 Las 8 casillas ya fueron asignadas.");
-      }, 300);
+        boton.innerHTML =
+            "🔒<br>OCUPADA";
 
-    }
+        equipo.textContent =
+            "⚾ " + equipoAsignado;
 
-  };
+        participante.textContent =
+            "👤 Participante: " + nombreParticipante;
 
-  casillas.appendChild(boton);
+        numeroCasilla.textContent =
+            "🎟️ Casilla: " + i;
+
+        resultado.style.display = "block";
+
+        nombre.value = "";
+
+        if (equiposDisponibles.length === 0) {
+
+            setTimeout(function () {
+
+                alert("🏆 Las 8 casillas ya fueron asignadas.");
+
+            }, 300);
+
+        }
+
+    };
+
+    casillas.appendChild(boton);
 }
 
 </script>
