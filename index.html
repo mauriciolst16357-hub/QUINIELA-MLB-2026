@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiniela MLB Playoffs 2026</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b1220;
+      color: white;
+      text-align: center;
+    }
+
+    .contenedor {
+      max-width: 600px;
+      margin: auto;
+      padding: 25px 15px;
+    }
+
+    h1 {
+      font-size: 30px;
+      margin-bottom: 5px;
+    }
+
+    .subtitulo {
+      color: #cbd5e1;
+      margin-bottom: 25px;
+    }
+
+    .premio {
+      background: #172033;
+      border-radius: 15px;
+      padding: 15px;
+      margin-bottom: 25px;
+    }
+
+    .premio strong {
+      font-size: 22px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      font-size: 17px;
+      border-radius: 10px;
+      border: none;
+      margin-bottom: 20px;
+    }
+
+    .casillas {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .casilla {
+      height: 120px;
+      border: 2px solid #334155;
+      background: #172033;
+      color: white;
+      border-radius: 15px;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .casilla:hover {
+      background: #24324a;
+    }
+
+    .casilla.ocupada {
+      background: #374151;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    .resultado {
+      display: none;
+      margin-top: 25px;
+      background: #172033;
+      border-radius: 15px;
+      padding: 25px;
+    }
+
+    .resultado h2 {
+      margin-top: 0;
+    }
+
+    .equipo {
+      font-size: 25px;
+      font-weight: bold;
+      margin: 15px 0;
+    }
+
+    .aviso {
+      margin-top: 20px;
+      color: #cbd5e1;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="contenedor">
+
+  <h1>⚾ QUINIELA MLB 2026 🏆</h1>
+
+  <div class="subtitulo">
+    PLAYOFFS MLB
+  </div>
+
+  <div class="premio">
+    💵 Entrada: <strong>$500</strong><br>
+    👥 8 participantes<br>
+    🏆 Premio: <strong>$4,000</strong>
+  </div>
+
+  <p>Escribe tu nombre:</p>
+
+  <input
+    type="text"
+    id="nombre"
+    placeholder="Ejemplo: Juan"
+    maxlength="30"
+  >
+
+  <p>🎟️ Elige una casilla</p>
+
+  <div class="casillas" id="casillas"></div>
+
+  <div class="resultado" id="resultado">
+    <h2>🎉 ¡EQUIPO ASIGNADO!</h2>
+
+    <div class="equipo" id="equipo"></div>
+
+    <p id="participante"></p>
+    <p id="numeroCasilla"></p>
+  </div>
+
+  <div class="aviso">
+    ⚠️ Una vez elegida una casilla, no se puede cambiar.
+  </div>
+
+</div>
+
+<script>
+
+const equipos = [
+  "Los Angeles Dodgers",
+  "Milwaukee Brewers",
+  "Cleveland Guardians",
+  "Tampa Bay Rays",
+  "New York Yankees",
+  "Chicago White Sox",
+  "San Diego Padres",
+  "Atlanta Braves"
+];
+
+let equiposDisponibles = [...equipos];
+
+const casillas = document.getElementById("casillas");
+const nombre = document.getElementById("nombre");
+const resultado = document.getElementById("resultado");
+const equipo = document.getElementById("equipo");
+const participante = document.getElementById("participante");
+const numeroCasilla = document.getElementById("numeroCasilla");
+
+for (let i = 1; i <= 8; i++) {
+
+  const boton = document.createElement("button");
+
+  boton.className = "casilla";
+  boton.innerHTML = "🔒<br>CASILLA " + i;
+
+  boton.onclick = function () {
+
+    const nombreParticipante = nombre.value.trim();
+
+    if (nombreParticipante === "") {
+      alert("Primero escribe tu nombre.");
+      nombre.focus();
+      return;
+    }
+
+    if (equiposDisponibles.length === 0) {
+      alert("Todos los equipos ya fueron asignados.");
+      return;
+    }
+
+    const posicion = Math.floor(
+      Math.random() * equiposDisponibles.length
+    );
+
+    const equipoAsignado =
+      equiposDisponibles.splice(posicion, 1)[0];
+
+    boton.classList.add("ocupada");
+    boton.disabled = true;
+
+    boton.innerHTML =
+      "🔒<br>OCUPADA";
+
+    equipo.textContent = "⚾ " + equipoAsignado;
+
+    participante.textContent =
+      "👤 Participante: " + nombreParticipante;
+
+    numeroCasilla.textContent =
+      "🎟️ Casilla: " + i;
+
+    resultado.style.display = "block";
+
+    nombre.value = "";
+
+    if (equiposDisponibles.length === 0) {
+
+      setTimeout(function () {
+        alert("🏆 Las 8 casillas ya fueron asignadas.");
+      }, 300);
+
+    }
+
+  };
+
+  casillas.appendChild(boton);
+}
+
+</script>
+
+</body>
+</html>
